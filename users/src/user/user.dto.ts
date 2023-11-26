@@ -29,6 +29,7 @@ const ERRORS_MESSAGES = {
     TYPE: "La contraseña tiene que ser un string",
     REQUIRED: "La contraseña es requerido",
   },
+  PARAMS_ID: "El id tiene que ser un valido",
 };
 
 export const CreateUserDto = z.object({
@@ -68,5 +69,20 @@ export const CreateUserDto = z.object({
       .max(100, ERRORS_MESSAGES.PASSWORD.MAX),
   }),
 });
+
+export const GetUsersDto = z.object({
+  params: z.object({
+    id: z.string({ required_error: ERRORS_MESSAGES.PARAMS_ID }),
+  }),
+});
+
+export const UpdateUserDto = z.object({
+  body: CreateUserDto.shape.body.omit({ password: true }).partial(),
+  params: GetUsersDto.shape.params,
+});
+
+export type IGetUsersDto = z.infer<typeof GetUsersDto>["params"];
+
+export type IUpdateUserDto = z.infer<typeof UpdateUserDto>["body"];
 
 export type ICreateUserDto = z.infer<typeof CreateUserDto>["body"];
