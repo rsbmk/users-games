@@ -9,6 +9,10 @@ export class GameService {
     return this.gameRepository.create(game);
   }
 
+  findAll() {
+    return this.gameRepository.getAll();
+  }
+
   async find(id: number) {
     const game = await this.gameRepository.get(id);
     if (!game) throw new GameNotFoundException({ id });

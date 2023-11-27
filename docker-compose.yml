@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  users:
+    container_name: users
+    restart: unless-stopped
+    env_file:
+      - ./users/.env
+    build:
+      context: ./users
+      dockerfile: ./Dockerfile
+      # args:
+        # - PORT=${PORT}
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./users:/app
+      # - node_modules_users:/app/node_modules
+    networks:
+          - app-network
+
+  games:
+    container_name: games
+    restart: unless-stopped
+    env_file:
+      - ./games/.env
+    build:
+      context: ./games
+      dockerfile: ./Dockerfile
+      # args:
+        # - PORT=${PORT}
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./games:/app
+      # - node_modules_games:/app/node_modules
+    networks:
+          - app-network
+
+# volumes:
+#   node_modules_games:
+#   node_modules_users:
+
+networks: 
+    app-network:
+        name:
+            rsbmk_mynetwork

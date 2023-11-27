@@ -9,6 +9,15 @@ export class GamesController extends Controller {
     super();
   }
 
+  async findAll(req: Request, res: Response) {
+    try {
+      const user = await this.gameService.findAll();
+      return this.success(user, res, { req, message: "Games found" });
+    } catch (error) {
+      this.catchError(error, res, { req });
+    }
+  }
+
   async findById(req: Request<IGetGamesDto>, res: Response) {
     try {
       const user = await this.gameService.find(+req.params.id);

@@ -9,7 +9,8 @@
     "lint": "eslint --ignore-path .gitignore . --ext .js,.ts",
     "build": "npm run build:clean && npm run build:tsc",
     "build:clean": "rimraf dist; exit 0",
-    "build:tsc": "tsc -p tsconfig.prod.json"
+    "build:tsc": "tsc -p tsconfig.prod.json",
+    "postinstall": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
