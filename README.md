@@ -9,6 +9,7 @@ Descripción breve del proyecto.
 - [Requisitos](#requisitos)
 - [Configuración](#configuración)
 - [Cómo Usar](#cómo-usar)
+- [Endpoints](#endpoints)
 
 ## Introducción
 
@@ -63,5 +64,5 @@ Con esto, los microservicios estarán disponibles en los siguientes puertos:
 - **Users:** http://localhost:3001
 - **Games:** http://localhost:3002
 
-### Endpoints
+## Endpoints
 En el archivo `Insomnia_endpoints.json` se encuentran los endpoints disponibles para cada microservicio, listos para importar en Insomnia.
