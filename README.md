@@ -1,7 +1,5 @@
 # Users-Games
 
-Descripción breve del proyecto.
-
 ## Contenido
 
 - [Introducción](#introducción)
