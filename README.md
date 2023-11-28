@@ -4,8 +4,6 @@
 
 - [Introducción](#introducción)
 - [Estructura del Proyecto](#estructura-del-proyecto)
-- [Requisitos](#requisitos)
-- [Configuración](#configuración)
 - [Cómo Usar](#cómo-usar)
 - [Endpoints](#endpoints)
 
