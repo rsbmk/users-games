@@ -4,9 +4,11 @@ WORKDIR /app
 
 COPY . /app
 
-RUN npm install
+RUN apk add --no-cache python3 make g++ \
+    && npm install \
+    && apk del python3 make g++
 
 EXPOSE 3000
 
-# CMD sleep infinity
+# CMD sleep infinitys
 CMD ["npm", "run", "start:dev"]

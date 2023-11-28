@@ -1,9 +1,10 @@
+import { MessageBroker } from "../shared/message.broker";
 import { ICreateGameDto, IUpdateGameDto } from "./games.dto";
 import { GameNotFoundException } from "./games.exception";
 import { GameRespository } from "./games.respository";
 
 export class GameService {
-  constructor(private readonly gameRepository: GameRespository) {}
+  constructor(private readonly gameRepository: GameRespository, private readonly messageBroker: MessageBroker) {}
 
   create(game: ICreateGameDto) {
     return this.gameRepository.create(game);
@@ -16,6 +17,13 @@ export class GameService {
   async find(id: number) {
     const game = await this.gameRepository.get(id);
     if (!game) throw new GameNotFoundException({ id });
+
+    const message = {
+      game,
+      message: "Game found",
+    };
+
+    this.messageBroker.publish(JSON.stringify(message));
 
     return game;
   }
