@@ -4,8 +4,9 @@ WORKDIR /app
 
 COPY . /app
 
-# RUN npm install
+RUN npm install
 
 EXPOSE 3000
 
-CMD sleep infinity
+# CMD sleep infinity
+CMD ["npm", "run", "start:dev"]
