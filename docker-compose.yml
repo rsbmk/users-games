@@ -9,13 +9,12 @@ services:
     build:
       context: ./users
       dockerfile: ./Dockerfile
-      # args:
-        # - PORT=${PORT}
     ports:
       - "3001:3000"
+      - "9228:9228"
     volumes:
       - ./users:/app
-      # - node_modules_users:/app/node_modules
+      - node_modules_users:/app/node_modules
     networks:
           - app-network
 
@@ -27,19 +26,28 @@ services:
     build:
       context: ./games
       dockerfile: ./Dockerfile
-      # args:
-        # - PORT=${PORT}
     ports:
       - "3002:3000"
+      - "9229:9229"
     volumes:
       - ./games:/app
-      # - node_modules_games:/app/node_modules
+      - node_modules_games:/app/node_modules
     networks:
           - app-network
 
-# volumes:
-#   node_modules_games:
-#   node_modules_users:
+  redis:
+    image: redis
+    container_name: redis_game-user
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - app-network 
+
+volumes:
+  node_modules_games:
+  node_modules_users:
 
 networks: 
     app-network:
