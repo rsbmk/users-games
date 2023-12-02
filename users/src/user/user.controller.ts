@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import { Controller } from "../shared/controllers";
-import { ICreateUserDto, IGetUsersDto, IUpdateUserDto } from "./user.dto";
+import { IGetUsersDto, IUpdateUserDto } from "./user.dto";
 import { UserService } from "./user.service";
 
 export class UserController extends Controller {
@@ -13,15 +13,6 @@ export class UserController extends Controller {
     try {
       const user = await this.userService.find(+req.params.id);
       return this.success(user, res, { req, message: "User found" });
-    } catch (error) {
-      this.catchError(error, res, { req });
-    }
-  }
-
-  async create(req: Request<Request["params"], unknown, ICreateUserDto>, res: Response) {
-    try {
-      const userCreated = await this.userService.create(req.body);
-      return this.success(userCreated, res, { req, status: 201, message: "User created" });
     } catch (error) {
       this.catchError(error, res, { req });
     }

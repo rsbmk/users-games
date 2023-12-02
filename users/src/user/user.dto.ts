@@ -32,44 +32,6 @@ const ERRORS_MESSAGES = {
   PARAMS_ID: "El id tiene que ser un valido",
 };
 
-export const CreateUserDto = z.object({
-  body: z.object({
-    ege: z
-      .number({
-        invalid_type_error: ERRORS_MESSAGES.EGE.TYPE,
-        required_error: ERRORS_MESSAGES.EGE.REQUIRED,
-      })
-      .min(13, ERRORS_MESSAGES.EGE.MIN),
-    name: z
-      .string({
-        invalid_type_error: ERRORS_MESSAGES.NAME.TYPE,
-        required_error: ERRORS_MESSAGES.NAME.REQUIRED,
-      })
-      .min(3, ERRORS_MESSAGES.NAME.MIN)
-      .max(100, ERRORS_MESSAGES.NAME.MAX),
-    username: z
-      .string({
-        invalid_type_error: ERRORS_MESSAGES.USERNAME.TYPE,
-        required_error: ERRORS_MESSAGES.USERNAME.REQUIRED,
-      })
-      .min(3, ERRORS_MESSAGES.USERNAME.MIN)
-      .max(100, ERRORS_MESSAGES.USERNAME.MAX),
-    email: z
-      .string({
-        invalid_type_error: ERRORS_MESSAGES.EMAIL.TYPE,
-        required_error: ERRORS_MESSAGES.EMAIL.REQUIRED,
-      })
-      .email(ERRORS_MESSAGES.EMAIL.INVALID),
-    password: z
-      .string({
-        invalid_type_error: ERRORS_MESSAGES.PASSWORD.TYPE,
-        required_error: ERRORS_MESSAGES.PASSWORD.REQUIRED,
-      })
-      .min(6, ERRORS_MESSAGES.PASSWORD.MIN)
-      .max(100, ERRORS_MESSAGES.PASSWORD.MAX),
-  }),
-});
-
 export const GetUsersDto = z.object({
   params: z.object({
     id: z.string({ required_error: ERRORS_MESSAGES.PARAMS_ID }),
@@ -77,12 +39,39 @@ export const GetUsersDto = z.object({
 });
 
 export const UpdateUserDto = z.object({
-  body: CreateUserDto.shape.body.omit({ password: true }).partial(),
+  body: z
+    .object({
+      ege: z
+        .number({
+          invalid_type_error: ERRORS_MESSAGES.EGE.TYPE,
+          required_error: ERRORS_MESSAGES.EGE.REQUIRED,
+        })
+        .min(13, ERRORS_MESSAGES.EGE.MIN),
+      name: z
+        .string({
+          invalid_type_error: ERRORS_MESSAGES.NAME.TYPE,
+          required_error: ERRORS_MESSAGES.NAME.REQUIRED,
+        })
+        .min(3, ERRORS_MESSAGES.NAME.MIN)
+        .max(100, ERRORS_MESSAGES.NAME.MAX),
+      username: z
+        .string({
+          invalid_type_error: ERRORS_MESSAGES.USERNAME.TYPE,
+          required_error: ERRORS_MESSAGES.USERNAME.REQUIRED,
+        })
+        .min(3, ERRORS_MESSAGES.USERNAME.MIN)
+        .max(100, ERRORS_MESSAGES.USERNAME.MAX),
+      email: z
+        .string({
+          invalid_type_error: ERRORS_MESSAGES.EMAIL.TYPE,
+          required_error: ERRORS_MESSAGES.EMAIL.REQUIRED,
+        })
+        .email(ERRORS_MESSAGES.EMAIL.INVALID),
+    })
+    .partial(),
   params: GetUsersDto.shape.params,
 });
 
 export type IGetUsersDto = z.infer<typeof GetUsersDto>["params"];
 
 export type IUpdateUserDto = z.infer<typeof UpdateUserDto>["body"];
-
-export type ICreateUserDto = z.infer<typeof CreateUserDto>["body"];

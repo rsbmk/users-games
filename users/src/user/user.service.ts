@@ -1,21 +1,10 @@
-import bcrypt from "bcrypt";
-import omit from "lodash/omit";
-
 import { MessageBroker } from "../shared/message.broker";
-import { ICreateUserDto, IUpdateUserDto } from "./user.dto";
+import { IUpdateUserDto } from "./user.dto";
 import { UserNotFoundException } from "./user.exception";
 import { UserRespository } from "./user.respository";
 
 export class UserService {
   constructor(private readonly userRepository: UserRespository, private readonly messageBroker: MessageBroker) {}
-
-  async create(user: ICreateUserDto) {
-    const hashedPassword = await bcrypt.hash(user.password, 10);
-    user.password = hashedPassword;
-
-    const createdUser = await this.userRepository.create(user);
-    return omit(createdUser, ["password"]);
-  }
 
   async find(id: number) {
     const user = await this.userRepository.get(id);
@@ -25,6 +14,7 @@ export class UserService {
       user,
       message: "User found",
     };
+
     this.messageBroker.publish(JSON.stringify(message));
 
     return user;
