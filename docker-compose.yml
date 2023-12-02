@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   users:
-    container_name: users
+    container_name: users-gateway
     restart: unless-stopped
     env_file:
       - ./users/.env
@@ -31,12 +31,12 @@ services:
       - "9228:9228"
     volumes:
       - ./users:/app
-      - node_modules_users:/app/node_modules
+      - node_modules_gatewat:/app/node_modules
     networks:
       - app-network-gateway
 
   games:
-    container_name: games
+    container_name: games-gateway
     restart: unless-stopped
     env_file:
       - ./games/.env
@@ -47,14 +47,14 @@ services:
       - "3003:3000"
       - "9227:9227"
     volumes:
-      - ./gateway:/app
-      - node_modules_gatewat:/app/node_modules
+      - ./games:/app
+      - node_modules_games:/app/node_modules
     networks:
       - app-network-gateway
 
   redis:
     image: redis
-    container_name: redis_game-user
+    container_name: redis_game-user-gateway
     ports:
       - "6379:6379"
     volumes:
@@ -75,9 +75,9 @@ services:
       - app-network-gateway
 
 volumes:
-  node_modules_games:
   node_modules_users:
   node_modules_gatewat:
+  node_modules_games:
 
 networks:
   app-network-gateway:
