@@ -11,12 +11,29 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "3001:3000"
+      - "9229:9229"
+    volumes:
+      - ./users:/app
+      - node_modules_users:/app/node_modules
+    networks:
+      - app-network-gateway
+
+  gateway:
+    container_name: gateway
+    restart: unless-stopped
+    env_file:
+      - ./gateway/.env
+    build:
+      context: ./gateway
+      dockerfile: ./Dockerfile
+    ports:
+      - "3002:3000"
       - "9228:9228"
     volumes:
       - ./users:/app
       - node_modules_users:/app/node_modules
     networks:
-          - app-network
+      - app-network-gateway
 
   games:
     container_name: games
@@ -27,13 +44,13 @@ services:
       context: ./games
       dockerfile: ./Dockerfile
     ports:
-      - "3002:3000"
-      - "9229:9229"
+      - "3003:3000"
+      - "9227:9227"
     volumes:
-      - ./games:/app
-      - node_modules_games:/app/node_modules
+      - ./gateway:/app
+      - node_modules_gatewat:/app/node_modules
     networks:
-          - app-network
+      - app-network-gateway
 
   redis:
     image: redis
@@ -43,13 +60,25 @@ services:
     volumes:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     networks:
-      - app-network 
+      - app-network-gateway
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_game-user-gateway
+    # platform: linux/x86_64 # Only for Macs (m1,m2)
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      #TZ: America/Bogota
+    networks:
+      - app-network-gateway
 
 volumes:
   node_modules_games:
   node_modules_users:
+  node_modules_gatewat:
 
-networks: 
-    app-network:
-        name:
-            rsbmk_mynetwork
+networks:
+  app-network-gateway:
+    name: rsbmk_gateway
