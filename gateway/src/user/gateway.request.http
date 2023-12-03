@@ -1,6 +1,9 @@
 # BASE_URL=http://localhost:3000/api
 # BASE_URL=http://gateway.gateway-api.orb.local:3000
 
+# agregar en el readme que hay que hacer un npm install en cada carpeta y hay que hacer el npx prisma migrate dev --name init
+
+### Create user
 POST http://gateway.gateway-api.orb.local:3000/api/signup
 content-type: application/json
 
@@ -24,4 +27,4 @@ content-type: application/json
 ### Test auth
 GET http://gateway.gateway-api.orb.local:3000/games
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZWdlIjoyMywibmFtZSI6IlJvYmVydG8iLCJlbWFpbCI6InJzYm1rQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicnNibWsiLCJzdGF0ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyMy0xMi0wMlQyMToxNzoxOC44NjdaIiwidXBkYXRlZEF0IjoiMjAyMy0xMi0wMlQyMToxNzoxOC44NjdaIiwiaWF0IjoxNzAxNTUyMDM4LCJleHAiOjE3MDE2Mzg0Mzh9.Hgdd9GRs4VhpUsacxDr_eug_KNbEzdTX7-qL6421fHI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZWdlIjoyMywibmFtZSI6IlJvYmVydG8iLCJlbWFpbCI6InJzYm1rQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicnNibWsiLCJzdGF0ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyMy0xMi0wM1QyMjo0NDoxMi42OTRaIiwidXBkYXRlZEF0IjoiMjAyMy0xMi0wM1QyMjo0NDoxMi42OTRaIiwiaWF0IjoxNzAxNjQzNTY3LCJleHAiOjE3MDE3Mjk5Njd9.7mXwuwu8X4vd-n3sHIKCZEB22UR6ijTGQ6ZAdyO9E0U
