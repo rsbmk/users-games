@@ -25,7 +25,7 @@ export function validation(schema: Schema) {
         });
       }
 
-      return controller.error({}, res, {
+      return controller.error(error, res, {
         message: "Validation error",
         req,
       });
