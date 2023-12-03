@@ -1,4 +1,4 @@
-# Users-Games
+# Gateway - Users/Games API's
 
 ## Contenido
 
@@ -9,7 +9,11 @@
 
 ## Introducción
 
-Bienvenido a Users-Games, una práctica de microservicios utilizando Node.js y Redis. Este proyecto presenta un sistema de gestión de juegos y usuarios, donde dos microservicios independientes se comunican eficientemente a través de un message broker implementado con Redis. Simplificando la puesta en marcha, he contenerizado ambos microservicios con Docker, incluyendo un servicio específico para la base de datos Redis.
+En este proyecto se realiza una práctica de microservicios utilizando NodeJs, Redis, MySql y SQL Lite. Se presenta un sistema de gestión de juegos y usuarios, donde tres microservicios independientes se comunican eficientemente a través de un message broker.
+
+El tercer microservicio es un gateway que se encarga de recibir las peticiones de los clientes y redirigirlas a los microservicios correspondientes. Pero sirve como autenticador de usuarios, para que los microservicios de juegos y usuarios no tengan que preocuparse por la autenticación de los usuarios.
+
+Este API Gateway se encarga de validar el token de acceso enviado por el cliente, y si es válido, extrae el id del usuario y lo envía en el header de la petición al microservicio correspondiente.
 
 ![Users-Games](./diagram.dio.png)
 
