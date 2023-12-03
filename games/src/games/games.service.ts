@@ -1,10 +1,11 @@
-import { MessageBroker } from "../shared/message.broker";
+import { IMessageBroker } from "packages/messageBroker";
+
 import { ICreateGameDto, IUpdateGameDto } from "./games.dto";
 import { GameNotFoundException } from "./games.exception";
-import { GameRespository } from "./games.respository";
+import { IGameRepository } from "./games.respository";
 
 export class GameService {
-  constructor(private readonly gameRepository: GameRespository, private readonly messageBroker: MessageBroker) {}
+  constructor(private readonly gameRepository: IGameRepository, private readonly messageBroker: IMessageBroker) {}
 
   create(game: ICreateGameDto) {
     return this.gameRepository.create(game);

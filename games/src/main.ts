@@ -1,9 +1,15 @@
+import { AuthMiddleware } from "packages/middleware";
+
 import { app } from "./app";
 import { gameRouter } from "./games/games.router";
 import { healthRouter } from "./health/health.router";
-import { AuthMiddleware } from "./shared/Middlewares/auth";
 
 // Unprotected routes
+app.use((req, res, next) => {
+  console.log("Request:", { method: req.method, url: req.url, body: req.body });
+  next();
+});
+
 app.use("/health", healthRouter);
 
 const authMiddleware = new AuthMiddleware();

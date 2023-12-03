@@ -1,6 +1,7 @@
 import { Router } from "express";
 
-import { validation } from "../shared/Middlewares/validations";
+import { validation } from "packages/middleware";
+
 import { gameController } from "./games.dependencies";
 import { CreateGameDto, GetGameDto, UpdateGameDto } from "./games.dto";
 

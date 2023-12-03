@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
+import { Controller } from "packages/controller";
 
-import { Controller } from "../shared/controllers";
 import { ICreateGameDto, IGetGamesDto, IUpdateGameDto } from "./games.dto";
 import { GameService } from "./games.service";
 

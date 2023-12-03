@@ -2,10 +2,11 @@ import { Game, PrismaClient } from "@prisma/client";
 
 import { ICreateGameDto, IUpdateGameDto } from "./games.dto";
 
-type IGameRepository = {
+export type IGameRepository = {
   create(user: ICreateGameDto): Promise<Game>;
   delete(id: number): Promise<Game>;
   get(id: number): Promise<Game | null>;
+  getAll(): Promise<Game[]>;
   update(id: number, user: IUpdateGameDto): Promise<Game>;
 };
 
