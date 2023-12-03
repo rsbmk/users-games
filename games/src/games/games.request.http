@@ -1,0 +1,21 @@
+### Get all games (GET /games) through gateway
+
+GET http://gateway.gateway-api.orb.local:3000/games
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZWdlIjoyMywibmFtZSI6IlJvYmVydG8iLCJlbWFpbCI6InJzYm1rQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicnNibWsiLCJzdGF0ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyMy0xMi0wMlQyMToxNzoxOC44NjdaIiwidXBkYXRlZEF0IjoiMjAyMy0xMi0wMlQyMToxNzoxOC44NjdaIiwiaWF0IjoxNzAxNTUyMDM4LCJleHAiOjE3MDE2Mzg0Mzh9.Hgdd9GRs4VhpUsacxDr_eug_KNbEzdTX7-qL6421fHI
+
+### GET one game (GET /games/:id) through gateway
+
+GET http://gateway.gateway-api.orb.local:3000/games/1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZWdlIjoyMywibmFtZSI6IlJvYmVydG8iLCJlbWFpbCI6InJzYm1rQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicnNibWsiLCJzdGF0ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyMy0xMi0wMlQyMToxNzoxOC44NjdaIiwidXBkYXRlZEF0IjoiMjAyMy0xMi0wMlQyMToxNzoxOC44NjdaIiwiaWF0IjoxNzAxNTUyMDM4LCJleHAiOjE3MDE2Mzg0Mzh9.Hgdd9GRs4VhpUsacxDr_eug_KNbEzdTX7-qL6421fHI
+
+### Create a game (POST /games) through gateway
+POST http://gateway.gateway-api.orb.local:3000/games
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZWdlIjoyMywibmFtZSI6IlJvYmVydG8iLCJlbWFpbCI6InJzYm1rQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicnNibWsiLCJzdGF0ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyMy0xMi0wMlQyMToxNzoxOC44NjdaIiwidXBkYXRlZEF0IjoiMjAyMy0xMi0wMlQyMToxNzoxOC44NjdaIiwiaWF0IjoxNzAxNTUyMDM4LCJleHAiOjE3MDE2Mzg0Mzh9.Hgdd9GRs4VhpUsacxDr_eug_KNbEzdTX7-qL6421fHI
+
+{
+    "name": "New Game",
+    "description": "New Game Description"
+}

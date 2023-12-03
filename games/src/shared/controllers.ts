@@ -1,5 +1,4 @@
-import { NextFunction, Request, Response } from "express";
-import { Schema, ZodError } from "zod";
+import { Request, Response } from "express";
 
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { CustomsExceptions } from "./customs.exeptions";
@@ -58,33 +57,4 @@ export class Controller {
 
     return this.error({}, res, { message: "Internal server error", status: 500, ...options });
   }
-}
-
-// validation middleware
-const controller = new Controller();
-export function validation(schema: Schema) {
-  return (req: Request, res: Response, next: NextFunction) => {
-    try {
-      schema.parse({
-        body: req.body,
-        query: req.query,
-        params: req.params,
-      });
-      next();
-    } catch (error) {
-      if (error instanceof ZodError) {
-        const fieldErrors = error.flatten().fieldErrors;
-
-        return controller.error(fieldErrors, res, {
-          message: "Validation error",
-          req,
-        });
-      }
-
-      return controller.error({}, res, {
-        message: "Validation error",
-        req,
-      });
-    }
-  };
 }
