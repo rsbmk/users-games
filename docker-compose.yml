@@ -30,7 +30,7 @@ services:
       - "3002:3000"
       - "9228:9228"
     volumes:
-      - ./users:/app
+      - ./gateway:/app
       - node_modules_gatewat:/app/node_modules
     networks:
       - app-network-gateway
