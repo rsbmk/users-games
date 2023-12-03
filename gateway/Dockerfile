@@ -1,9 +1,10 @@
 FROM node:20.10.0-alpine3.18
 
-WORKDIR /app
+WORKDIR /app/api
 
-COPY . /app
+COPY . /app/api
 
+# make this for bycrypt library
 RUN apk add --no-cache python3 make g++ \
     && npm install \
     && apk del python3 make g++
