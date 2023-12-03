@@ -1,6 +1,5 @@
 import { Express, NextFunction, Request, Response } from "express";
-import { createProxyMiddleware, type Options } from "http-proxy-middleware";
-import { Url } from "url";
+import { createProxyMiddleware, fixRequestBody, type Options } from "http-proxy-middleware";
 
 const GAMES_BASE_URL = process.env.GAMES_BASE_URL || "http://localhost:3001";
 const USERS_BASE_URL = process.env.USERS_BASE_URL || "http://localhost:3002";
@@ -17,15 +16,7 @@ export const ROUTES: Routes = [
       target: GAMES_BASE_URL,
       changeOrigin: true,
       autoRewrite: true,
-      onClose: (proxyRes: unknown, proxySocket: unknown, proxyHead: unknown) => {
-        console.log("Proxy closed!");
-        console.log({ proxyRes, proxySocket, proxyHead });
-      },
-      onError: (err: Error, req: Request, res: Response, target?: string | Partial<Url>) => {
-        console.log("Proxy error:", err);
-        console.log({ req, res, target });
-      },
-      timeout: 5000,
+      onProxyReq: fixRequestBody,
     },
   },
   {
@@ -34,15 +25,7 @@ export const ROUTES: Routes = [
       target: USERS_BASE_URL,
       changeOrigin: true,
       autoRewrite: true,
-      onClose: (proxyRes: unknown, proxySocket: unknown, proxyHead: unknown) => {
-        console.log("Proxy closed!");
-        console.log({ proxyRes, proxySocket, proxyHead });
-      },
-      onError: (err: Error, req: Request, res: Response, target?: string | Partial<Url>) => {
-        console.log("Proxy error:", err);
-        console.log({ req, res, target });
-      },
-      timeout: 5000,
+      onProxyReq: fixRequestBody,
     },
   },
 ];
@@ -55,8 +38,7 @@ export const ROUTES: Routes = [
 
 export const setupProxies = (app: Express, routes: Routes) => {
   routes.forEach((r) => {
-    const proxy = createProxyMiddleware(r.proxy);
-    app.use(r.url, proxy);
+    app.use(r.url, createProxyMiddleware(r.proxy));
   });
 
   app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
