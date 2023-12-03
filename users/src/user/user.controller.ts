@@ -11,8 +11,6 @@ export class UserController extends Controller {
   }
 
   async findById(req: AuthRequest<IGetUsersDto>, res: Response) {
-    if (req.user) return this.success(req.user, res, { req, message: "User found" });
-
     try {
       const user = await this.userService.find(+req.params.id);
       return this.success(user, res, { req, message: "User found" });
