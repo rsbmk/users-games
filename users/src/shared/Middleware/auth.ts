@@ -1,11 +1,13 @@
 import { User } from "@prisma/client";
 import type { NextFunction, Request, Response } from "express";
+import { ParamsDictionary } from "express-serve-static-core";
 
 import { Controller } from "../controllers";
 
-export type AuthRequest = Request & {
+export interface AuthRequest<P = ParamsDictionary, ResBody = unknown, ReqBody = unknown, ReqQuery = qs.ParsedQs, Locals extends Record<string, unknown> = Record<string, unknown>>
+  extends Request<P, ResBody, ReqBody, ReqQuery, Locals> {
   user?: User;
-};
+}
 
 export class AuthMiddleware extends Controller {
   run(req: AuthRequest, res: Response, next: NextFunction) {

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 
+import { AuthRequest } from "../shared/Middleware/auth";
 import { Controller } from "../shared/controllers";
 import { IGetUsersDto, IUpdateUserDto } from "./user.dto";
 import { UserService } from "./user.service";
@@ -9,7 +10,9 @@ export class UserController extends Controller {
     super();
   }
 
-  async findById(req: Request<IGetUsersDto>, res: Response) {
+  async findById(req: AuthRequest<IGetUsersDto>, res: Response) {
+    if (req.user) return this.success(req.user, res, { req, message: "User found" });
+
     try {
       const user = await this.userService.find(+req.params.id);
       return this.success(user, res, { req, message: "User found" });
