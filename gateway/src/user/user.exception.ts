@@ -1,4 +1,4 @@
-import { CustomsExceptions } from "../shared/customs.exeptions";
+import { CustomsExceptions } from "packages/controller";
 
 export class UserNotFoundException extends CustomsExceptions {
   constructor(data: unknown, message?: string) {

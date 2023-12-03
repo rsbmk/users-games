@@ -1,54 +1,70 @@
-import { Express } from "express";
-import { createProxyMiddleware } from "http-proxy-middleware";
+import { Express, NextFunction, Request, Response } from "express";
+import { createProxyMiddleware, type Options } from "http-proxy-middleware";
+import { Url } from "url";
 
 const GAMES_BASE_URL = process.env.GAMES_BASE_URL || "http://localhost:3001";
 const USERS_BASE_URL = process.env.USERS_BASE_URL || "http://localhost:3002";
 
 type Routes = {
   url: string;
-  auth: boolean;
-  proxy: {
-    target: string;
-    changeOrigin: boolean;
-    // pathRewrite: {
-    //   [key: string]: string;
-    // };
-  };
+  proxy: Options;
 }[];
 
 export const ROUTES: Routes = [
   {
     url: "/games",
-    auth: true,
-    // creditCheck: false,
-    // rateLimit: {
-    //   windowMs: 15 * 60 * 1000,
-    //   max: 5,
-    // },
     proxy: {
       target: GAMES_BASE_URL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   [`^/games`]: "",
-      // },
+      autoRewrite: true,
+      onClose: (proxyRes: unknown, proxySocket: unknown, proxyHead: unknown) => {
+        console.log("Proxy closed!");
+        console.log({ proxyRes, proxySocket, proxyHead });
+      },
+      onError: (err: Error, req: Request, res: Response, target?: string | Partial<Url>) => {
+        console.log("Proxy error:", err);
+        console.log({ req, res, target });
+      },
+      timeout: 5000,
     },
   },
   {
     url: "/users",
-    auth: true,
-    // creditCheck: true,
     proxy: {
       target: USERS_BASE_URL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   [`^/users`]: "",
-      // },
+      autoRewrite: true,
+      onClose: (proxyRes: unknown, proxySocket: unknown, proxyHead: unknown) => {
+        console.log("Proxy closed!");
+        console.log({ proxyRes, proxySocket, proxyHead });
+      },
+      onError: (err: Error, req: Request, res: Response, target?: string | Partial<Url>) => {
+        console.log("Proxy error:", err);
+        console.log({ req, res, target });
+      },
+      timeout: 5000,
     },
   },
 ];
 
+// export const setupProxies = (app: Express, routes: Routes) => {
+//   routes.forEach((r) => {
+//     app.use(r.url, createProxyMiddleware(r.proxy));
+//   });
+// };
+
 export const setupProxies = (app: Express, routes: Routes) => {
   routes.forEach((r) => {
-    app.use(r.url, createProxyMiddleware(r.proxy));
+    const proxy = createProxyMiddleware(r.proxy);
+    app.use(r.url, proxy);
+  });
+
+  app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
+    if (err) {
+      console.error("Proxy error:", err);
+      res.end();
+    } else {
+      next();
+    }
   });
 };

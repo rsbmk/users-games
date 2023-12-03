@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { validation } from "../shared/middlewares/validations";
+import { validation } from "packages/middleware";
 
 import { userController } from "./user.dependencies";
 import { SignInDto, SignUpDto } from "./user.dto";

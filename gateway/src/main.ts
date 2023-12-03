@@ -17,6 +17,11 @@ app.use("/api", userRouter);
 // Middlewares
 app.use(authMiddleware.verifyToken.bind(authMiddleware));
 
+app.use((req, res, next) => {
+  console.log("Request:", { method: req.method, url: req.url, body: req.body });
+  next();
+});
+
 // Proxy
 setupProxies(app, ROUTES);
 

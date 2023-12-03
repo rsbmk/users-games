@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-import { Controller } from "../controllers";
+import { Controller } from "packages/controller";
 
 export class AuthMiddleware extends Controller {
   async verifyToken(req: Request, res: Response, next: NextFunction) {

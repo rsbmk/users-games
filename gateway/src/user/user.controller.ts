@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
-import { Controller } from "../shared/controllers";
+import { Controller } from "packages/controller";
+
 import { ISignInUserDto, ISignUpUserDto } from "./user.dto";
 import { UserService } from "./user.service";
 
