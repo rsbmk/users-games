@@ -1,10 +1,11 @@
-import { MessageBroker } from "../shared/message.broker";
+import { IMessageBroker } from "packages/messageBroker";
+
 import { IUpdateUserDto } from "./user.dto";
 import { UserNotFoundException } from "./user.exception";
 import { UserRespository } from "./user.respository";
 
 export class UserService {
-  constructor(private readonly userRepository: UserRespository, private readonly messageBroker: MessageBroker) {}
+  constructor(private readonly userRepository: UserRespository, private readonly messageBroker: IMessageBroker) {}
 
   async find(id: number) {
     const user = await this.userRepository.get(id);

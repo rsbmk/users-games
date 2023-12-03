@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-import { AuthRequest } from "../shared/Middleware/auth";
-import { Controller } from "../shared/controllers";
+import { AuthRequest, Controller } from "packages";
+
 import { IGetUsersDto, IUpdateUserDto } from "./user.dto";
 import { UserService } from "./user.service";
 

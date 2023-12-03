@@ -1,6 +1,6 @@
 import { app } from "./app";
 
-import { AuthMiddleware } from "./shared/Middleware/auth";
+import { AuthMiddleware } from "packages/middleware";
 
 import { healthRouter } from "./health/health.router";
 import { userRouter } from "./user/user.router";
