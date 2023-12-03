@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { validation } from "../shared/controllers";
+import { validation } from "../shared/Middleware/validation";
 
 import { userController } from "./user.dependencies";
 import { GetUsersDto, UpdateUserDto } from "./user.dto";
