@@ -1,0 +1,27 @@
+# BASE_URL=http://localhost:3000/api
+# BASE_URL=http://gateway.gateway-api.orb.local:3000
+
+POST http://gateway.gateway-api.orb.local:3000/api/signup
+content-type: application/json
+
+{
+  "name": "Roberto",
+  "username": "rsbmk",
+  "password": "rsbmk123",
+  "email": "rsbmk@gmail.com",
+  "ege": 23
+}
+
+### Sign In
+POST http://gateway.gateway-api.orb.local:3000/api/signin
+content-type: application/json
+
+{
+  "username": "rsbmk",
+  "password": "rsbmk123"
+}
+
+### Test auth
+GET http://gateway.gateway-api.orb.local:3000/games
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZWdlIjoyMywibmFtZSI6IlJvYmVydG8iLCJlbWFpbCI6InJzYm1rQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicnNibWsiLCJzdGF0ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyMy0xMi0wMlQyMToxNzoxOC44NjdaIiwidXBkYXRlZEF0IjoiMjAyMy0xMi0wMlQyMToxNzoxOC44NjdaIiwiaWF0IjoxNzAxNTUyMDM4LCJleHAiOjE3MDE2Mzg0Mzh9.Hgdd9GRs4VhpUsacxDr_eug_KNbEzdTX7-qL6421fHI

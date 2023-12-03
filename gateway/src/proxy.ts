@@ -1,15 +1,18 @@
 import { Express } from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 
+const GAMES_BASE_URL = process.env.GAMES_BASE_URL || "http://localhost:3001";
+const USERS_BASE_URL = process.env.USERS_BASE_URL || "http://localhost:3002";
+
 type Routes = {
   url: string;
   auth: boolean;
   proxy: {
     target: string;
     changeOrigin: boolean;
-    pathRewrite: {
-      [key: string]: string;
-    };
+    // pathRewrite: {
+    //   [key: string]: string;
+    // };
   };
 }[];
 
@@ -23,11 +26,11 @@ export const ROUTES: Routes = [
     //   max: 5,
     // },
     proxy: {
-      target: "https://www.google.com",
+      target: GAMES_BASE_URL,
       changeOrigin: true,
-      pathRewrite: {
-        [`^/games`]: "",
-      },
+      // pathRewrite: {
+      //   [`^/games`]: "",
+      // },
     },
   },
   {
@@ -35,11 +38,11 @@ export const ROUTES: Routes = [
     auth: true,
     // creditCheck: true,
     proxy: {
-      target: "https://www.google.com",
+      target: USERS_BASE_URL,
       changeOrigin: true,
-      pathRewrite: {
-        [`^/users`]: "",
-      },
+      // pathRewrite: {
+      //   [`^/users`]: "",
+      // },
     },
   },
 ];

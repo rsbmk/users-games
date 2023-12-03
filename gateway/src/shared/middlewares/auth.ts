@@ -16,10 +16,7 @@ export class AuthMiddleware extends Controller {
 
     try {
       const decoded = jwt.verify(token, secret);
-      // console.log("user logged", decoded);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      req.user = decoded;
+      req.headers["user"] = JSON.stringify(decoded);
       next();
     } catch (err) {
       return this.catchError(err, res, { message: "Invalid token", req, status: 401 });
